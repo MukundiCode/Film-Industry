@@ -13,13 +13,15 @@
 <body>
   <div class="main">
     <p class="sign" align="center">Create Account</p>
-    <form class="form1">
-      <input class="un " type="text" align="center" placeholder="Name">
-      <input class="un " type="text" align="center" placeholder="Surname">
-      <input class="un " type="text" align="center" placeholder="Email">
+    <form class="form1"  method = "POST">
+     {% csrf_token %}
+      <input class="un " type="text" name = "firstName" align="center" placeholder="Name">
+      <input class="un " type="text" name = "surname"align="center" placeholder="Surname">
+      <input class="un " type="text" name = "email"align="center" placeholder="Email">
       <input class="un " type="text" align="center" placeholder="Username">
-      <input class="pass" type="password" align="center" placeholder="Password">
-      <a class="submit" align="center">Next</a>
+      <input class="pass" type="password" name = "phoneNumber"align="center" placeholder="Password">
+      <input type = "submit" class="submit" align="center">
+      </form>
       <!--<p class="forgot" align="center"><a href="#">Forgot Password?</p> -->
             
                 

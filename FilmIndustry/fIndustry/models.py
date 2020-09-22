@@ -2,7 +2,8 @@ from django.db import models
 
 # Create your models here.
 class person(models.Model):
-    name = models.CharField(max_length=80)
+    firstName = models.CharField(max_length=80)
+    surname = models.CharField(max_length=80, default="null")
     email = models.EmailField( max_length=254)
     phoneNumber = models.CharField(max_length=50)
 class talent(models.Model):
