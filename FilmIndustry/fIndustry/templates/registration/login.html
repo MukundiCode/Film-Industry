@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static "main.css" %}">
+  <!--<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">-->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+  <title>Login</title>
+</head>
+
+<body>
+    {%if form.errors%}
+    <p>There is something wrong with your input</p>
+    {% endif %}
+    {%if next%}
+    <p>You can't access this page, please login first </p>
+    {% endif %}
+  <div class="main">
+    <p class="sign" align="center">Personal Information</p>
+    <form class="form1"  method = "POST">
+     {% csrf_token %}
+      <input class="un " type="text" name = "username" align="center" placeholder="Username">
+      <input class="un " type="Password" name = "password"align="center" placeholder="Password">
+      <input type = "submit" class="submit" value = "login" align="center">
+      </form>
+      <!--<p class="forgot" align="center"><a href="#">Forgot Password?</p> -->
+            
+                
+    </div>
+     
+</body>
+
+</html>
