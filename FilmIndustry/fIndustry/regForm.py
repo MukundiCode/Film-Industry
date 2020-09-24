@@ -10,9 +10,9 @@ class personForm(forms.ModelForm):
 class talentForm(forms.ModelForm):
     class Meta:
         model = talent
-        fields = ['CHITNumber','gender','address','race']
+        fields = ['CHITNumber','gender','address','race','person']
 
 class bankForm(forms.ModelForm):
     class Meta:
         model = bankDetails
-        fields = ['CHITNumber','bankName','accountNumber','branchCode']
+        fields = ['bankName','accountNumber','branchCode']

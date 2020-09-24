@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from fIndustry.regForm import personForm, talentForm, bankForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from fIndustry.models import person
 
 # Create your views here.
 def register(request):
@@ -28,14 +29,16 @@ def personalInfo(request):
         if form.is_valid():
             print("It is valid")
             form.save()
-        return redirect('talentInfo')
+        person_id = 2
+        return redirect('talentInfo',person_id)
     else:
         return render(request,'personalInfo.html',{})
 
-def talentInfo(request):
+def talentInfo(request,person_id):
     if request.method == "POST":
-        print(request.POST)
+        #person_obj = person.objects.get(pk = person_id)
         form = talentForm(request.POST)
+        print(form)
         print('checking validity...')
         if form.is_valid():
             print("It is valid")
