@@ -5,7 +5,7 @@ from fIndustry.models import talent, bankDetails
 class personForm(forms.ModelForm):
     class Meta:
         model = person
-        fields = ['firstName','surname','email','phoneNumber']
+        fields = ['firstName','surname','email','phoneNumber','user']
 
 class talentForm(forms.ModelForm):
     class Meta:

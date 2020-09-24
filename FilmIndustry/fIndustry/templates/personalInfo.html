@@ -19,7 +19,8 @@
       <input class="un " type="text" name = "surname"align="center" placeholder="Surname">
       <input class="un " type="text" name = "email"align="center" placeholder="Email">
       <input class="pass" type="text" name = "phoneNumber"align="center" placeholder="Phone Number">
-      <input type = "submit" href = "{%url 'talentInfo'%}" class="submit" align="center">
+      <input type = "hidden" name ="user" value="{{ currentUserID }}">
+      <input type = "submit" class="submit" align="center">
       </form>
       <!--<p class="forgot" align="center"><a href="#">Forgot Password?</p> -->
             

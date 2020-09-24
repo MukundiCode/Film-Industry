@@ -8,9 +8,7 @@ from fIndustry.models import person
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        print("It is post")
         if form.is_valid():
-            print("Form is valid")
             form.save()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
@@ -23,38 +21,37 @@ def register(request):
 
 def personalInfo(request):
     if request.method == "POST":
-        print(request.POST)
         form = personForm(request.POST)
-        print('checking validity...')
         if form.is_valid():
-            print("It is valid")
             form.save()
-        person_id = 2
-        return redirect('talentInfo',person_id)
+        thisUser = request.user
+        thisPerson = person.objects.get(user__exact = thisUser)
+        return redirect('talentInfo',thisPerson.id)
     else:
-        return render(request,'personalInfo.html',{})
+        currentUser = request.user
+        currentUserID = currentUser.id
+        return render(request,'personalInfo.html',{'currentUserID': currentUserID})
 
 def talentInfo(request,person_id):
     if request.method == "POST":
-        #person_obj = person.objects.get(pk = person_id)
         form = talentForm(request.POST)
-        print(form)
-        print('checking validity...')
         if form.is_valid():
-            print("It is valid")
             form.save()
-        return redirect('talentBank')
+        thisUser = request.user
+        thisPerson = person.objects.get(user__exact = thisUser)
+        return redirect('talentBank',thisPerson.id)
     else:
-        return render(request,'talentInfo.html',{}) 
+        personID = person_id
+        return render(request,'talentInfo.html',{'personID':personID}) 
 
-def talentBank(request):
+def talentBank(request,person_id):
     if request.method == "POST":
-        print(request.POST)
         form = bankForm(request.POST)
-        print('checking validity...')
+        print(form)
         if form.is_valid():
             print("It is valid")
             form.save()
         return redirect('personalInfo')
     else:
-        return render(request,'talentBank.html',{})
+        personID = person_id
+        return render(request,'talentBank.html',{'personID':personID})
