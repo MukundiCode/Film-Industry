@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from fIndustry.regForm import personForm, talentForm, bankForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
-from fIndustry.models import person
+from fIndustry.models import person, talent, bankDetails
 
 # Create your views here.
 def register(request):
@@ -51,7 +51,21 @@ def talentBank(request,person_id):
         if form.is_valid():
             print("It is valid")
             form.save()
-        return redirect('personalInfo')
+        userID = request.user.id
+        return redirect('profile')
     else:
         personID = person_id
         return render(request,'talentBank.html',{'personID':personID})
+
+def profile(request):
+    thisUser = request.user
+    thisPerson = person.objects.get(user__exact = thisUser)
+    thisTalent = talent.objects.get(person__exact = thisPerson)
+    thisBank = bankDetails.objects.get(person__exact = thisPerson)
+    context = {'name':thisPerson.firstName,'surname':thisPerson.surname,
+                'email':thisPerson.email,'number':thisPerson.phoneNumber,
+                'address':thisTalent.address,'CHIT':thisTalent.CHITNumber,
+                'race':thisTalent.race,'gender':thisTalent.gender,
+                'bankName':thisBank.bankName,'accountNumber':thisBank.accountNumber,
+                'branch':thisBank.branchCode}
+    return render(request,'profile.html',context)

@@ -15,4 +15,4 @@ class talentForm(forms.ModelForm):
 class bankForm(forms.ModelForm):
     class Meta:
         model = bankDetails
-        fields = ['bankName','accountNumber','branchCode']
+        fields = ['bankName','accountNumber','branchCode','person']
