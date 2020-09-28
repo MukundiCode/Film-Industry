@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from fIndustry.regForm import personForm, talentForm, bankForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
-from fIndustry.models import person, talent, bankDetails
+from fIndustry.models import person, talent, bankDetails, CHITNumber
 
 # Create your views here.
 def register(request):
@@ -35,14 +35,22 @@ def personalInfo(request):
 def talentInfo(request,person_id):
     if request.method == "POST":
         form = talentForm(request.POST)
+        print('checking validity')
         if form.is_valid():
+            print('it is valid')
             form.save()
+        else:
+            print(form.errors)
         thisUser = request.user
         thisPerson = person.objects.get(user__exact = thisUser)
         return redirect('talentBank',thisPerson.id)
     else:
         personID = person_id
-        return render(request,'talentInfo.html',{'personID':personID}) 
+        chitnumber = CHITNumber.objects.get(pk = 1)
+        setattr(chitnumber, 'CHITNo',(chitnumber.CHITNo+1))
+        chitnumber.save()
+        cn = str(chitnumber.CHITNo)
+        return render(request,'talentInfo.html',{'personID':personID,'CHIT':cn}) 
 
 def talentBank(request,person_id):
     if request.method == "POST":
@@ -51,11 +59,13 @@ def talentBank(request,person_id):
         if form.is_valid():
             print("It is valid")
             form.save()
-        userID = request.user.id
         return redirect('profile')
     else:
         personID = person_id
-        return render(request,'talentBank.html',{'personID':personID})
+        thisUser = request.user
+        thisPerson = person.objects.get(user__exact = thisUser)
+        thisTalent = talent.objects.get(person__exact = thisPerson)
+        return render(request,'talentBank.html',{'personID':personID, 'CHIT':thisTalent.CHITNumber})
 
 def profile(request):
     thisUser = request.user

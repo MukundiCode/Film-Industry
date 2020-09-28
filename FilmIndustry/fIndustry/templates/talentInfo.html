@@ -15,14 +15,29 @@
     <p class="sign" align="center">Personal Info</p>
     <form class="form1"  method = "POST">
      {% csrf_token %}
-      <input class="un " type="text" name = "CHITNumber" align="center" placeholder="CHITNumber">
-      <input class="un " type="text" name = "gender"align="center" placeholder="Gender">
+      <input type="hidden" name = "CHITNumber" value="0000">
+      <input class="un " type="text" name = "gender"align="center" placeholder="Gender"> 
+      <!--
+        <select class="un" align="center" id="id_gender" name="gender" form="raceForm">
+          <option align="center" value="" disabled selected hidden>Choose Gender</option>
+          <option value="male" name ="gender" type="text" align="center">Male</option>
+          <option value="female" selected name ="gender" type="text" align="center">Female</option>
+        </select>
+        -->
       <input class="un " type="text" name = "address"align="center" placeholder="address">
       <input class="un " type="text" name = "race"align="center" placeholder="race">
+    <!--
+      <select class="un" align="center" id="cars" name="race" form="raceForm">
+          <option align="center" value="" disabled selected hidden>Select Race</option>
+          <option value="Black" name="race" type="text" align="center">Black</option>
+          <option value="White" name="race" type="text" align="center">White</option>
+          <option value="Asian" name="race" type="text" align="center">Asian</option>
+          <option value="Other" name="race" type="text" align="center">Other</option>
+        </select>
+          -->
       <input type = "hidden" name ="person" value="{{ personID }}">
       <input type = "submit" class="submit" align="center">
       </form>
-      <!--<p class="forgot" align="center"><a href="#">Forgot Password?</p> -->
             
                 
     </div>

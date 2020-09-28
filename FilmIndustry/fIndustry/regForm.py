@@ -11,7 +11,7 @@ class talentForm(forms.ModelForm):
     class Meta:
         model = talent
         fields = ['CHITNumber','gender','address','race','person']
-
+        
 class bankForm(forms.ModelForm):
     class Meta:
         model = bankDetails

@@ -11,7 +11,7 @@ class person(models.Model):
 class talent(models.Model):
     person = models.ForeignKey(person,null = True, on_delete = models.CASCADE)
     CHITNumber = models.IntegerField(max_length=4)
-    gender = models.CharField(max_length=6)
+    gender = models.CharField(max_length = 254)
     address = models.CharField(max_length=254)
     race = models.CharField(max_length=20)
 
@@ -34,3 +34,6 @@ class jobTalent(models.Model):
 
 class Admin(models.Model):
     adminID = models.CharField(max_length=12)
+
+class CHITNumber(models.Model):
+    CHITNo = models.IntegerField(default=0000)
