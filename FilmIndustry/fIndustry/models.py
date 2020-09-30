@@ -23,7 +23,7 @@ class bankDetails(models.Model):
 
 class job(models.Model):
     ratePerHour = models.IntegerField(max_length=20)
-    date = models.DateField
+    jobDate = models.DateField(null=True)
 
 class jobTalent(models.Model):
     person = models.ForeignKey(person,null = True, on_delete = models.CASCADE)

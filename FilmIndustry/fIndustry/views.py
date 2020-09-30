@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from fIndustry.regForm import personForm, talentForm, bankForm
+from fIndustry.regForm import personForm, talentForm, bankForm, jobForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from fIndustry.models import person, talent, bankDetails, CHITNumber
@@ -82,3 +82,15 @@ def profile(request):
 
 def landingPage(request):
     return render (request, 'landingPage.html')
+
+def createJob(request):
+    if request.method == "POST":
+        form = jobForm(request.POST)
+        if form.is_valid():
+            print('Job created')
+            form.save()
+        return redirect('createJob')
+    else:
+        currentUser = request.user
+        currentUserID = currentUser.id
+        return render(request,'createJob.html')
