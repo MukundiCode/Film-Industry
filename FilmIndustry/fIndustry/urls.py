@@ -7,5 +7,5 @@ urlpatterns = [
     path('/talentInfo/<person_id>',views.talentInfo,name = 'talentInfo'),
     path('/talentBank/<person_id>',views.talentBank,name = 'talentBank'),
     path('register',views.register, name = 'register'),
-    #path('/profile',views.profile,name = 'profile')
+    path('landingPage',views.landingPage, name = 'landingPage')
 ]

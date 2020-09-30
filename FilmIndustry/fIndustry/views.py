@@ -79,3 +79,6 @@ def profile(request):
                 'bankName':thisBank.bankName,'accountNumber':thisBank.accountNumber,
                 'branch':thisBank.branchCode}
     return render(request,'profile.html',context)
+
+def landingPage(request):
+    return render (request, 'landingPage.html')
