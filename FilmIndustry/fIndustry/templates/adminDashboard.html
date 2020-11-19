@@ -1,0 +1,17 @@
+<!-- Search form -->
+<div class="md-form mt-0">
+<form  method='GET' name='q'>
+  <input name='q' type="text" placeholder="Search" aria-label="Search">
+  <input type = "submit" class="submit" align="center">
+</div>
+</form>
+<h1>Search Results</h1>
+
+<ul>
+  {% for person in personList %}
+    <li>
+      {{ person.firstName }}, {{ person.surname }}
+    </li>
+  {% endfor %}
+</ul>
+<a  type = "button" href="{% url 'createJob' %}" class="submit" align="center">Create new Job</a>

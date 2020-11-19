@@ -1,7 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
+#This is where the models for the database are defined, and the tables 
+#are made. Note, if any changes are made to this code, run the following commands
+#in cmd to update.
+#1. python manage.py make migrations (not sure about the space there)
+#2. python manage.py migrate
+class company(models.Model):
+    companyName = models.CharField(max_length=80)
+    address = models.CharField(max_length=254)
 class person(models.Model):
     user = models.OneToOneField(User,null=True,on_delete = models.CASCADE)
     firstName = models.CharField(max_length=80)

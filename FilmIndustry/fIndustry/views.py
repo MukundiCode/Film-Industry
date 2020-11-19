@@ -3,8 +3,12 @@ from fIndustry.regForm import personForm, talentForm, bankForm, jobForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from fIndustry.models import person, talent, bankDetails, CHITNumber
-
-# Create your views here.
+from django.db.models import Q
+#Tinashe Mukundi Chitamba
+#This script has the methods for the different views in the application.
+#It defines what the server does when each view is called, and which html page is
+#rendered. If there are any calculations needed, the method also defines that. 
+#Methods also process forms
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -94,3 +98,15 @@ def createJob(request):
         currentUser = request.user
         currentUserID = currentUser.id
         return render(request,'createJob.html')
+
+def adminDashboard(request):
+    if request.method == 'GET':
+        query = request.GET.get('q')
+        print(query)
+        personList = person.objects.filter(
+            Q(firstName__icontains=query) | Q(surname__icontains=query)
+        )
+        return render(request,'adminDashboard.html',{'personList':personList})
+        
+    personList = person.objects.all()
+    return render(request, 'adminDashboard.html',{'personList':personList})
